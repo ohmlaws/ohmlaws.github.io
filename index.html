@@ -1,4 +1,62 @@
----
-layout: home
-# Index page
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OhmLaws</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <script> tailwind.config = { darkMode: 'class' } </script>
+  <style> body { font-family: 'Inter', sans-serif; } </style>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300 scroll-smooth">
+
+<div class="flex flex-col min-h-screen">
+
+  <div class="md:flex flex-1 items-stretch">
+
+    <!-- Sidebar -->
+    <div id="sidebar-container" class="md:sticky md:top-0 md:h-screen"></div>
+
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 lg:hidden"></div>
+
+    <!-- Main + Rightbar -->
+    <div class="flex-1 flex flex-col md:flex-row items-stretch">
+
+      <!-- Main Content -->
+      <div class="flex-1 flex flex-col px-4 py-6 space-y-6 md:space-y-8 md:max-w-3xl md:mx-auto md:py-10 lg:max-w-4xl 
+                  md:overflow-y-auto md:h-screen">
+
+        <!-- Header -->
+        <div id="header-container" class="bg-white dark:bg-gray-900 md:bg-transparent md:dark:bg-transparent"></div>
+
+        <!-- Mobile Search Overlay -->
+        <div id="mobileSearchOverlay-container"></div>
+
+        <!-- ARTICLES -->
+        <div id="home-container"></div>
+        <div id="posts-container"></div>
+
+        <!-- Footer -->
+        <div id="footer-container"></div>
+
+      </div>
+
+      <!-- Right Sidebar desktop only -->
+      <div id="rightsidebar-container" class="hidden lg:block md:sticky md:top-0 md:h-screen"></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- JS -->
+<script src="/js/loadComponents.js"></script>
+<script src="/js/sidebar.js"></script>
+<script src="/js/themeToggle.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>
