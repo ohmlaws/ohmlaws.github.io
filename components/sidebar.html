@@ -1,0 +1,56 @@
+<!-- /components/sidebar.html -->
+<aside id="sidebar" class="fixed md:static inset-y-0 left-0 w-64 z-50 bg-gray-50 dark:bg-gray-800 shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 flex flex-col justify-between md:h-screen md:shadow-none">
+  <div>
+    <div class="flex flex-col items-center py-8">
+      <img src="https://ohmlaws.github.io/assets/img/avatar.png" class="w-24 h-24 rounded-full border-2 border-gray-300 dark:border-gray-600" alt="Logo">
+      <h2 class="mt-4 text-xl font-bold">OhmLaws</h2>
+      <p class="text-sm italic text-gray-500 dark:text-gray-400">Electrify your learning</p>
+    </div>
+
+    <nav class="mt-6 space-y-2 px-4">
+      <a href="/" class="nav-link flex items-center px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">
+        <i class="fa-fw fas fa-home mr-3"></i> HOME
+      </a>
+
+      <a href="/firstyear.html" class="nav-link flex items-center px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">
+        <i class="fas fa-book-open mr-3"></i> FIRST YEAR
+      </a>
+
+      <a href="https://ohmlaws.github.io/secondyear" class="nav-link flex items-center px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">
+        <i class="fas fa-graduation-cap mr-3"></i> SECOND YEAR
+      </a>
+
+      <a href="https://ohmlaws.github.io/Privacy-Policy" class="nav-link flex items-center px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">
+        <i class="fas fa-user-lock mr-3"></i> PRIVACY POLICY
+      </a>
+
+      <a href="https://ohmlaws.github.io/faq" class="nav-link flex items-center px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">
+        <i class="fas fa-question-circle mr-3"></i> FAQ
+      </a>
+    </nav>
+  </div>
+
+  <div class="flex justify-center gap-3 py-7 border-t border-gray-200 dark:border-gray-700">
+    <button id="themeToggleSidebar" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white" aria-label="Toggle theme">
+      <svg id="sunIconSidebar" xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px] hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/>
+      </svg>
+      <svg id="moonIconSidebar" xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+      </svg>
+    </button>
+
+    <a href="https://github.com/roniui" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white" aria-label="GitHub">
+      <i class="fab fa-github text-[16px]" aria-hidden="true"></i>
+    </a>
+
+    <a href="mailto:roniui.github.io@gmail.com" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white" aria-label="Email">
+      <i class="fas fa-envelope text-[16px]" aria-hidden="true"></i>
+    </a>
+
+    <a href="https://ohmlaws.github.io/feed.xml" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white" aria-label="RSS feed">
+      <i class="fas fa-rss text-[16px]" aria-hidden="true"></i>
+    </a>
+  </div>
+</aside>

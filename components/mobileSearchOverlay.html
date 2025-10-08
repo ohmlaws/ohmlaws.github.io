@@ -1,0 +1,20 @@
+<div id="mobileSearchOverlay" class="fixed inset-0 z-50 hidden lg:hidden transition-all">
+  <div class="absolute inset-0 w-full h-full bg-white dark:bg-gray-900"></div>
+  <div class="absolute top-10 left-0 w-full flex flex-col items-center">
+    <div class="relative w-[90%]">
+      <input
+        id="mobileSearchInput"
+        type="text"
+        placeholder="Search..."
+        class="w-full px-4 py-2 rounded-full border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring text-base bg-white dark:bg-gray-900 transition"
+        autocomplete="off"
+      />
+      <button id="closeMobileSearch"
+        class="absolute right-4 top-1/2 -translate-y-1/2 text-xl text-gray-600 dark:text-gray-300">
+        &times;
+      </button>
+    </div>
+    <!-- Results Panel (appears under search bar) -->
+    <div id="mobileSearchResults" class="mt-4 w-[90%] max-h-[90%] overflow-y-auto flex flex-col gap-4"></div>
+  </div>
+</div>
