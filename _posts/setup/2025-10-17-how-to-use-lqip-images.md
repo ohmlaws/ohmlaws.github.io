@@ -1,7 +1,7 @@
 ---
 title: "How to Use LQIP (Base64) Images in Jekyll Chirpy Theme"
 date: 2025-10-17
-categories: [tutorial, Web Development, Jekyll]
+categories: [Tutorial, Web Development]
 tags: [Jekyll, Chirpy, LQIP, Base64, SEO, Performance]
 description: "Learn how to use lightweight LQIP (Base64) images to improve your Jekyll Chirpy site's loading performance."
 ---
