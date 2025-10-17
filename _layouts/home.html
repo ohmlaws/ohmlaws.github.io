@@ -5,16 +5,10 @@ refactor: true
 
 {% include lang.html %}
 
-{% if page.category %}
-  {% assign all_pinned = site.posts | where_exp: 'post', "post.pin == true and post.categories contains page.category" %}
-  {% assign all_normal = site.posts | where_exp: 'post', "post.pin != true and post.hidden != true and post.categories contains page.category" %}
-{% else %}
-  {% assign all_pinned = site.posts | where: 'pin', 'true' | reject_exp: 'post', "post.categories contains 'tutorial'" %}
-  {% assign all_normal = site.posts | where_exp: 'post', "post.pin != true and post.hidden != true" | reject_exp: 'post', "post.categories contains 'tutorial'" %}
-{% endif %}
+{% assign all_pinned = site.posts | where: 'pin', 'true' | reject_exp: 'post', "post.categories contains 'tutorial'" %}
+{% assign all_normal = site.posts | where_exp: 'post', "post.pin != true and post.hidden != true" | reject_exp: 'post', "post.categories contains 'tutorial'" %}
 
-{% assign posts = '' | split: '' %}
-{% assign posts = posts | concat: all_pinned | concat: all_normal %}
+{% assign posts = all_pinned | concat: all_normal %}
 
 <!-- Get pinned posts on current page -->
 
