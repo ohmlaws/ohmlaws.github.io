@@ -7,16 +7,17 @@ refactor: true
 
 {% if page.category %}
   {%- comment -%}
-  ▸ If this page defines a 'category', only show posts from that category.
+  ▸ This page defines a category (like tutorials.html)
+  ▸ Show only posts from that category
   {%- endcomment -%}
   {% assign all_pinned = site.posts | where_exp: 'item', "item.pin == true and item.categories contains page.category" %}
   {% assign all_normal = site.posts | where_exp: 'item', "item.pin != true and item.hidden != true and item.categories contains page.category" %}
 {% else %}
   {%- comment -%}
-  ▸ Otherwise (normal homepage), exclude 'tutorial' category posts.
+  ▸ Normal home page → exclude 'tutorial' category posts
   {%- endcomment -%}
-  {% assign all_pinned = site.posts | where_exp: 'item', "item.pin == true and item.categories contains 'tutorial' == false" %}
-  {% assign all_normal = site.posts | where_exp: 'item', "item.pin != true and item.hidden != true and item.categories contains 'tutorial' == false" %}
+  {% assign all_pinned = site.posts | where: 'pin', 'true' | reject_exp: 'item', "item.categories contains 'tutorial'" %}
+  {% assign all_normal = site.posts | where_exp: 'item', "item.pin != true and item.hidden != true" | reject_exp: 'item', "item.categories contains 'tutorial'" %}
 {% endif %}
 
 {% assign posts = '' | split: '' %}
