@@ -1,0 +1,4 @@
+{% assign all_pinned = site.posts | where_exp: 'post', "post.pin == true and post.categories contains 'tutorial'" %}
+{% assign all_normal = site.posts | where_exp: 'post', "post.pin != true and post.hidden != true and post.categories contains 'tutorial'" %}
+{% assign posts = '' | split: '' %}
+{% assign posts = posts | concat: all_pinned | concat: all_normal %}
