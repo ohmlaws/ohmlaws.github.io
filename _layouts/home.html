@@ -5,18 +5,16 @@ refactor: true
 
 {% include lang.html %}
 
-{%- comment -%}
-Home page:
-- Exclude posts in 'tutorial' category
-- Handle pinned + normal posts with pagination
-{%- endcomment -%}
+{% comment %} Filter out any posts with the 'tutorial' category {% endcomment %}
+{% assign filtered_posts = site.posts | where_exp: "post", "post.categories contains 'tutorial' == false" %}
 
-{% assign all_pinned = site.posts | where_exp: "post", "post.pin == true and post.categories contains 'tutorial' | not" %}
-{% assign all_normal = site.posts | where_exp: "post", "post.pin != true and post.hidden != true and post.categories contains 'tutorial' | not" %}
+{% assign all_pinned = filtered_posts | where: 'pin', 'true' %}
+{% assign all_normal = filtered_posts | where_exp: 'item', 'item.pin != true and item.hidden != true' %}
 
 {% assign posts = '' | split: '' %}
 
 <!-- Get pinned posts on current page -->
+
 {% assign visible_start = paginator.page | minus: 1 | times: paginator.per_page %}
 {% assign visible_end = visible_start | plus: paginator.per_page %}
 
@@ -35,6 +33,7 @@ Home page:
 {% endif %}
 
 <!-- Get normal posts on current page -->
+
 {% assign normal_size = paginator.posts | size | minus: pinned_size %}
 
 {% if normal_size > 0 %}
@@ -70,6 +69,7 @@ Home page:
           {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
 
           {% assign lqip = null %}
+
           {% if post.image.lqip %}
             {% capture lqip_url %}{% include media-url.html src=post.image.lqip subpath=post.media_subpath %}{% endcapture %}
             {% assign lqip = 'lqip="' | append: lqip_url | append: '"' %}
@@ -115,12 +115,15 @@ Home page:
                 </div>
               {% endif %}
             </div>
+            <!-- .post-meta -->
           </div>
+          <!-- .card-body -->
         </div>
       </a>
     </article>
   {% endfor %}
 </div>
+<!-- #post-list -->
 
 {% if paginator.total_pages > 1 %}
   {% include post-paginator.html %}
