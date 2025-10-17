@@ -11,8 +11,8 @@ Home page:
 - Handle pinned + normal posts with pagination
 {%- endcomment -%}
 
-{% assign all_pinned = site.posts | where: 'pin', 'true' | reject_exp: 'post', "post.categories contains 'tutorial'" %}
-{% assign all_normal = site.posts | where_exp: 'post', "post.pin != true and post.hidden != true" | reject_exp: 'post', "post.categories contains 'tutorial'" %}
+{% assign all_pinned = site.posts | where_exp: "post", "post.pin == true and post.categories contains 'tutorial' | not" %}
+{% assign all_normal = site.posts | where_exp: "post", "post.pin != true and post.hidden != true and post.categories contains 'tutorial' | not" %}
 
 {% assign posts = '' | split: '' %}
 
