@@ -7,15 +7,14 @@ tags: [Jekyll, Chirpy, LQIP, Base64, SEO, Performance]
 description: "Learn how to use lightweight LQIP (Base64) images to improve your Jekyll Chirpy site's loading performance."
 ---
 
-
 Website performance plays a big role in both **SEO** and **user experience**. A faster site means visitors stay longer and search engines rank it higher.  
 One simple but powerful technique to speed up your site is using **LQIP (Low Quality Image Placeholders)**.  
 This post will guide you through the process of creating and using **Base64 LQIP images** in your **Jekyll Chirpy** theme.
 
 ---
 
- ![Desktop View](/assets/img/lqip-demo.png){: width="972" height="589" .w-50 .left}
 ##  What is LQIP?
+ ![Desktop View](/assets/img/lqip-demo.png){: width="972" height="589" .w-50 .left}
 
 **LQIP (Low Quality Image Placeholder)** is a small, blurred, lightweight version of your original image.  
 It appears instantly when a page loads, and is replaced by the full image once it’s downloaded.  
@@ -58,17 +57,18 @@ You can use any of these free online tools:
 
 
 Example conversion process:
+[Cloudinary PNG to WebP](https://cloudinary.com/tools/png-to-webp)
 1. Upload your `.jpg` or `.png` file.
 2. Convert it to `.webp` format for better compression.
-3. Download the compressed `.webp` image.
+3. Download the `.webp` image.
 
 ---
 
 ###  Step 2: Resize Image to 20x20 Pixels
 
-After compression, resize the image to around `**20x20 pixels**` (small but visible enough for placeholders).  
+After compression, resize the image to around **`20x20 pixels`** (small but visible enough for placeholders).  
 Use [Image Resizer](https://imageresizer.com/) for quick resizing.  
-This tiny version will act as your `**LQIP preview**`.
+This tiny version will act as your **`LQIP preview`**.
 
 
 ---
@@ -80,8 +80,9 @@ Now, convert your resized image to `Base64` format using:
 - [Base64 Image Encoder](https://www.base64-image.de/)
 
 Steps:
-1. Upload the `**20x20 px**` image.
-2. Copy the `**Base64 string**` shown under `"Data URI scheme"`.
+1. Upload the **`20x20 px`** image.
+2. After processing image click </> button.
+3. Copy the **`Base64 string`** shown under `For use in <img> elements`.
 
 Example output:
 
@@ -98,7 +99,7 @@ and paste the Base64 code in the `image:` field inside the front matter.
 
 Example:
 
-```
+```markdown
 ---
 title: "My Blog Post with LQIP"
 date: 2025-10-18 16:34:00 +0530
@@ -141,6 +142,7 @@ The Chirpy theme natively supports LQIP implementation. If you're not seeing the
 {: .prompt-tip }
 
 ---
+
 ### Tips for Best Results
 
 Use `.webp` images whenever possible.
@@ -149,7 +151,7 @@ Keep LQIP images under `1KB` in size.
 
 Use descriptive filenames for SEO.
 
-Test loading time using PageSpeed Insights.
+Test loading time using `PageSpeed Insights`.
 
 
 
@@ -167,21 +169,21 @@ Improve performance and user satisfaction.
 
 ---
 
- Useful Tools Summary
+<span style="color: red;">Useful Tools Summary</span>
 
-
-> Convert PNG/JPG to WebP	[Cloudinary](https://cloudinary.com/tools/png-to-webp)
-
+>
 Compress Images to 10 kb	[Cloudinary](https://cloudinary.com/tools/compress-png-to-10kb)
 
-Resize Image	[Image Resizer](https://imageresizer.com)
+Convert PNG/JPG to WebP	[Cloudinary](https://cloudinary.com/tools/png-to-webp)
+
+Resize Image to 20x20 px [Image Resizer](https://imageresizer.com)
 
 Convert to Base64	[Base64 Image Encoder](https://base64-image.de)
 {: .prompt-info }
 
 ---
 
-You can use different tools also.
+Feel free to use different tools; these links are not the only solution.
 
 ---
 
