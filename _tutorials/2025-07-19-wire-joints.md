@@ -5,5 +5,5 @@ layout: post
 image:
   path: /assets/img/firstyear.png
 ---
-Content here...
-Image added
+Content here..
+
