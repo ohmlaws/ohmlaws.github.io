@@ -172,11 +172,13 @@ Improve performance and user satisfaction.
 <span style="color: red;">Useful Tools Summary</span>
 
 >
+[Cloudinary Tool Hub](https://cloudinary.com/tools)
+>
+[Canva](https://www.canva.com/)
+>
 Compress Images to 10 kb	[Cloudinary](https://cloudinary.com/tools/compress-png-to-10kb)
-{: .prompt-info }
 >
 Convert PNG/JPG to WebP	[Cloudinary](https://cloudinary.com/tools/png-to-webp)
-{: .prompt-info }
 >
 Resize Image to 20x20 px [Image Resizer](https://imageresizer.com)
 >
