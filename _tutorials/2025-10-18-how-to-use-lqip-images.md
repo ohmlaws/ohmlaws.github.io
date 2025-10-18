@@ -173,11 +173,13 @@ Improve performance and user satisfaction.
 
 >
 Compress Images to 10 kb	[Cloudinary](https://cloudinary.com/tools/compress-png-to-10kb)
-
+{: .prompt-info }
+>
 Convert PNG/JPG to WebP	[Cloudinary](https://cloudinary.com/tools/png-to-webp)
-
+{: .prompt-info }
+>
 Resize Image to 20x20 px [Image Resizer](https://imageresizer.com)
-
+>
 Convert to Base64	[Base64 Image Encoder](https://base64-image.de)
 {: .prompt-info }
 
