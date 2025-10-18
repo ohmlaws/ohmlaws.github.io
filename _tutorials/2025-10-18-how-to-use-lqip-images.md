@@ -172,9 +172,9 @@ Improve performance and user satisfaction.
 <span style="color: red;">Useful Tools Summary</span>
 
 >
-[Cloudinary Tool Hub](https://cloudinary.com/tools)
+Cloudinary Tool Hub [Cloudinary](https://cloudinary.com/tools)
 >
-[Canva](https://www.canva.com/)
+Creating new design [Canva](https://www.canva.com/)
 >
 Compress Images to 10 kb	[Cloudinary](https://cloudinary.com/tools/compress-png-to-10kb)
 >
