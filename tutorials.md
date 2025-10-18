@@ -1,4 +1,4 @@
 ---
-layout: Tutorials
+layout: tutorials
 title: Tutorials
 ---
