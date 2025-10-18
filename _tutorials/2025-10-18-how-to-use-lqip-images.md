@@ -7,7 +7,6 @@ tags: [Jekyll, Chirpy, LQIP, Base64, SEO, Performance]
 description: "Learn how to use lightweight LQIP (Base64) images to improve your Jekyll Chirpy site's loading performance."
 ---
 
-![LQIP concept placeholder](https://via.placeholder.com/800x400?text=LQIP+Concept)
 
 Website performance plays a big role in both **SEO** and **user experience**. A faster site means visitors stay longer and search engines rank it higher.  
 One simple but powerful technique to speed up your site is using **LQIP (Low Quality Image Placeholders)**.  
@@ -81,10 +80,12 @@ Example:
 ```
 ---
 title: "My Blog Post with LQIP"
-date: 2025-10-16
+date: 2025-10-18 16:34:00 +0530
 categories: [Web Development]
 tags: [Jekyll, Chirpy, LQIP]
-image: "data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEALwA..."
+image:
+  path: /assets/img/secondyear.webp
+  lqip: data:image/webp;base64,UklGRkABAABXRUJQVlA4IDQBA...
 description: "Using Base64 LQIP images in Jekyll Chirpy theme."
 ---
 ```
