@@ -169,6 +169,9 @@ collections:
   tabs:
     output: true
     sort_by: order
+  tutorials:
+    output: true
+    permalink: /tutorials/:title/
 
 defaults:
   - scope:
