@@ -14,6 +14,7 @@ This post will guide you through the process of creating and using **Base64 LQIP
 
 ---
 
+ ![Desktop View](/assets/img/lqip-demo.png){: width="972" height="589" .w-50 .left}
 ##  What is LQIP?
 
 **LQIP (Low Quality Image Placeholder)** is a small, blurred, lightweight version of your original image.  
@@ -40,7 +41,9 @@ It helps in improving **perceived performance** and creating a smooth **lazy loa
     2. Upload your image and place it within the design.
     3. Adjust the image to fit the frame, ensuring important elements are visible.
     4. Export the image as a high-quality PNG or JPG.
+       
 ---
+
 ##  Steps to Create a Base64 LQIP Image
 
 Here’s the complete process to convert your images into **Base64 LQIP placeholders** for Jekyll Chirpy:
