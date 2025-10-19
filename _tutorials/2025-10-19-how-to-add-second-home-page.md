@@ -129,26 +129,31 @@ Now open `_config.yml` and scroll to the bottom of the file.
 (a) Define the new collection
 
 Look for something like:
-
+```
  tabs:
    output: true
    sort_by: order 
+```
 
-Then add your new collection just after 
+` Then add your new collection just after `
+
 ```
 tutorials:
   output: true
   permalink: /tutorials/:title/
 ```
+
 (b) Add a new scope for your collection
 
 Scroll further down to find the section:
-
+```
 values:
   layout: page
   permalink: /:title/ 
+```
 
-After that, add:
+` After that, add: `
+
 ```
 - scope:
     path: ""
@@ -158,6 +163,7 @@ After that, add:
     comments: true
     toc: true
 ```
+
 > Make sure you are only adding, not removing existing code. Save `_config.yml`.
 {: .prompt-warning }
 
@@ -170,6 +176,7 @@ Now go to your `_tutorials` folder and create your first post. For example:
 `_tutorials/how-to-add-lqip.md`
 
 Add the front matter:
+
 ```
 ---
 layout: post
