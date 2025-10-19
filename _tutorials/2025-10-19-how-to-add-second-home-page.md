@@ -190,11 +190,8 @@ You should see your new collection posts displayed, styled similarly to your mai
 ---
 
 > Final Notes
-
-> You can repeat this process to create multiple collections (e.g.` _projects, _news, _case-studies`{: .filepath}, etc.).
-
+> You can repeat this process to create multiple collections (e.g.` _projects, _news, _case-studies`, etc.).
 > Make sure your layout file, collection folder, and collection name all match exactly.
-
 > Each collection may have its own layout, allowing you to customize appearance, metadata or ordering separately.
 {: .prompt-info }
 
