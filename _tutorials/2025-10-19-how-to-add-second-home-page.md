@@ -20,8 +20,7 @@ In your `_layouts` folder, create a new layout file for your new collection post
 `_layouts/tutorials.html`
 
 Add the following code inside it:
-{% raw %}
-```Markdown
+```liquid
 ---
 layout: page
 ---
@@ -29,21 +28,21 @@ layout: page
 {{ content }}
 
 <div id="post-list" class="flex-grow-1 px-xl-1">
-  {% for post in site.tutorials %}
+  {% raw %}{% endraw %}{% for post in site.tutorials %}
     <article class="card-wrapper card">
       <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
-        {% assign card_body_col = '12' %}
+        {% raw %}{% endraw %}{% assign card_body_col = '12' %}
 
-        {% if post.image %}
-          {% assign src = post.image.path | default: post.image %}
-          {% capture src %}{% include media-url.html src=src subpath=post.media_subpath %}{% endcapture %}
-          {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
-          {% assign lqip = null %}
+        {% raw %}{% endraw %}{% if post.image %}
+          {% raw %}{% endraw %}{% assign src = post.image.path | default: post.image %}
+          {% raw %}{% endraw %}{% capture src %}{% include media-url.html src=src subpath=post.media_subpath %}{% endcapture %}
+          {% raw %}{% endraw %}{% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
+          {% raw %}{% endraw %}{% assign lqip = null %}
 
-          {% if post.image.lqip %}
-            {% capture lqip_url %}{% include media-url.html src=post.image.lqip subpath=post.media_subpath %}{% endcapture %}
-            {% assign lqip = 'lqip="' | append: lqip_url | append: '"' %}
-          {% endif %}
+          {% raw %}{% endraw %}{% if post.image.lqip %}
+            {% raw %}{% endraw %}{% capture lqip_url %}{% include media-url.html src=post.image.lqip subpath=post.media_subpath %}{% endcapture %}
+            {% raw %}{% endraw %}{% assign lqip = 'lqip="' | append: lqip_url | append: '"' %}
+          {% raw %}{% endraw %}{% endif %}
 
           <div class="col-md-5">
             <div class="preview-img">
@@ -51,14 +50,14 @@ layout: page
             </div>
           </div>
 
-          {% assign card_body_col = '7' %}
-        {% endif %}
+          {% raw %}{% endraw %}{% assign card_body_col = '7' %}
+        {% raw %}{% endraw %}{% endif %}
 
         <div class="col-md-{{ card_body_col }}">
           <div class="card-body d-flex flex-column">
             <h1 class="card-title my-2 mt-md-0">{{ post.title }}</h1>
             <div class="card-text content mt-0 mb-3">
-              <p>{% include post-description.html %}</p>
+              <p>{% raw %}{% endraw %}{% include post-description.html %}</p>
             </div>
             <div class="post-meta flex-grow-1 d-flex align-items-end">
               <div class="me-auto">
@@ -69,10 +68,9 @@ layout: page
         </div>
       </a>
     </article>
-  {% endfor %}
+  {% raw %}{% endraw %}{% endfor %}
 </div>
 ```
-{% endraw %}
 > Make sure this part:
 {% raw %}` {% for post in site.tutorials %} `{% endraw %}
 matches the collection name you’ll create in the next step.
