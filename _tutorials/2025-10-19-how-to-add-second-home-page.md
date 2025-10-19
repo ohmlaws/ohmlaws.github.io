@@ -20,7 +20,7 @@ In your `_layouts` folder, create a new layout file for your new collection post
 `_layouts/tutorials.html`
 
 Add the following code inside it:
-
+{% raw %}
 ```Markdown
 ---
 layout: page
@@ -72,6 +72,7 @@ layout: page
   {% endfor %}
 </div>
 ```
+{% endraw %}
 > Make sure this part:
 ` {% for post in site.tutorials %} `
 matches the collection name you’ll create in the next step.
