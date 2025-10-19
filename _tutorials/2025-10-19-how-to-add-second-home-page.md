@@ -191,7 +191,7 @@ You should see your new collection posts displayed, styled similarly to your mai
 
 > Final Notes
 
-> You can repeat this process to create multiple collections (e.g.` _projects`, `_news`, `_case-studies`, etc.).
+> You can repeat this process to create multiple collections (e.g.` _projects, _news, _case-studies`{: .filepath}, etc.).
 
 > Make sure your layout file, collection folder, and collection name all match exactly.
 
