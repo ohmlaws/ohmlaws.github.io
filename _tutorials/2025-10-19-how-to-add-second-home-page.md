@@ -90,7 +90,7 @@ Example:
 All posts in this folder will appear on your new blog-home page.
 
 Each post in this folder should have front matter like:
-```Markdown
+```
 ---
 layout: post
 title: Your Post Title
@@ -110,7 +110,7 @@ Example:
 `tutorials.md`
 
 Add this front matter inside:
-```Markdown
+```
 ---
 layout: tutorials  # your layout file name
 title: Tutorials # your new home page title 
@@ -122,7 +122,7 @@ This file will serve as the new “home page” for your collection.
 
 ---
 
-Step 4: Update `_config.yml`
+## Step 4: Update `_config.yml`
 
 Now open `_config.yml` and scroll to the bottom of the file.
 
@@ -191,8 +191,11 @@ You should see your new collection posts displayed, styled similarly to your mai
 ---
 
 > Final Notes
+> 
 > You can repeat this process to create multiple collections (e.g.` _projects, _news, _case-studies`, etc.).
+> 
 > Make sure your layout file, collection folder, and collection name all match exactly.
+> 
 > Each collection may have its own layout, allowing you to customize appearance, metadata or ordering separately.
 {: .prompt-info }
 
