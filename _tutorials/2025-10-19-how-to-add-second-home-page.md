@@ -72,10 +72,10 @@ layout: page
   {% endfor %}
 </div>
 ```
-Make sure this part:
+> Make sure this part:
 ` {% for post in site.tutorials %} `
 matches the collection name you’ll create in the next step.
-
+{: .prompt-warning }
 
 ---
 
@@ -157,8 +157,8 @@ After that, add:
     comments: true
     toc: true
 ```
-Make sure you are only adding, not removing existing code. Save `_config.yml`.
-
+> Make sure you are only adding, not removing existing code. Save `_config.yml`.
+{: .prompt-warning }
 
 ---
 
@@ -189,14 +189,14 @@ You should see your new collection posts displayed, styled similarly to your mai
 
 ---
 
-Final Notes
+> Final Notes
 
-You can repeat this process to create multiple collections (e.g., _projects, _news, _case-studies, etc.).
+> You can repeat this process to create multiple collections (e.g.` _projects`, `_news`, `_case-studies`, etc.).
 
-Make sure your layout file, collection folder, and collection name all match exactly.
+> Make sure your layout file, collection folder, and collection name all match exactly.
 
-Each collection may have its own layout, allowing you to customize appearance, metadata or ordering separately.
-
+> Each collection may have its own layout, allowing you to customize appearance, metadata or ordering separately.
+{: .prompt-info }
 
 
 ---
