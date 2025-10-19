@@ -129,9 +129,13 @@ Now open `_config.yml` and scroll to the bottom of the file.
 (a) Define the new collection
 
 Look for something like:
+
  `tabs:`
+ 
   `output: true`
+  
   `sort_by: order`
+  
 
 `Then add your new collection just after`
 
