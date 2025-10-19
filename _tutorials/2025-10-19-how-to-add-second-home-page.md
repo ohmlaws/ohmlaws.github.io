@@ -74,7 +74,7 @@ layout: page
 ```
 {% endraw %}
 > Make sure this part:
-` {% for post in site.tutorials %} `
+{% raw %}` {% for post in site.tutorials %} `{% endraw %}
 matches the collection name you’ll create in the next step.
 {: .prompt-warning }
 
