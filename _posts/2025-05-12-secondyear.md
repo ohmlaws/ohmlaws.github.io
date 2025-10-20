@@ -6,6 +6,7 @@ date: 2025-05-12 20:45:00 +0530
 categories: [2nd year]
 tags: [ITI]
 author: Roni
+math: true
 permalink: /secondyear/
 image:
   path: /assets/img/secondyear.webp
