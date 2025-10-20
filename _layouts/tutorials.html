@@ -5,7 +5,7 @@ layout: page
 {{ content }}
 
 <div id="post-list" class="flex-grow-1 px-xl-1">
-  {% for post in site.tutorials %}
+  {% for post in site.tutorials reversed %}  
     <article class="card-wrapper card">
       <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
         {% assign card_body_col = '12' %}
@@ -42,7 +42,6 @@ layout: page
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
               <div class="me-auto">
-                <!-- posted date --> 
                 <i class="far fa-calendar fa-fw me-1"></i>
 {{ post.date | date: "%b %-d, %Y" }}
               </div>
