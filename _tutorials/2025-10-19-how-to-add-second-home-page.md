@@ -2,8 +2,7 @@
 layout: post
 title: "How to Add a Second Blog Home Page Collection in Jekyll Chirpy"
 date: 2025-10-19
-categories: [tutorial]
-tags: [Jekyll, Chirpy]
+categories: [Guide]
 image:
   path: /assets/img/jekyll-collection.png
 ---
