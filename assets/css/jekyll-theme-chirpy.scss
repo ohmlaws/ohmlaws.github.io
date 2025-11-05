@@ -28,16 +28,22 @@
   color: #25D366 !important;
 }
 
+/* Default: no blur for normal images */
 .preview-img img {
   display: block;
   width: 100%;
   height: auto;
-  filter: blur(8px);
-  opacity: .5;
   transition: filter .35s ease, opacity .35s ease;
   will-change: filter, opacity;
 }
 
+/* Apply blur ONLY if LQIP exists */
+.preview-img img[data-has-lqip="true"]:not(.loaded) {
+  filter: blur(10px);
+  opacity: .7;
+}
+
+/* Once loaded (JS adds .loaded) */
 .preview-img img.loaded {
   filter: blur(0);
   opacity: 1;
