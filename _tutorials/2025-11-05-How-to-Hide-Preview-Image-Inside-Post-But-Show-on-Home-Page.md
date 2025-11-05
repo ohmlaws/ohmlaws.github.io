@@ -51,7 +51,7 @@ What you need to do is find this code section
         </div>
       {% endif %}
 ```
-{% raw %}
+{% endraw %}
 `and replace with this`
 {% raw %}
 ```liquid      
