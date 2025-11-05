@@ -31,11 +31,15 @@ Go to your theme folder and open:
 `/_layouts/post.html`
 
 Find the block where the image is rendered. Wrap it inside this condition:
-
+{% raw %}
 ```liquid
 {% if page.image.show_image_in_post != false %}
 ```
-What you need to do is, find this code section 
+{% endraw %}
+
+What you need to do is find this code section 
+
+{% raw %}
 
 ```liquid
         <div class="mt-3 mb-3">
@@ -46,9 +50,9 @@ What you need to do is, find this code section
         </div>
       {% endif %}
 ```
-
+{% raw %}
 `and replace with this`
-
+{% raw %}
 ```liquid      
       {% if page.image.show_image_in_post != false %}
         <div class="mt-3 mb-3">
@@ -61,7 +65,7 @@ What you need to do is, find this code section
       
       {% endif %}
 ```
-
+{% endraw %}
 
 This means:
 
