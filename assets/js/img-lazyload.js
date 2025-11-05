@@ -2,29 +2,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const images = document.querySelectorAll('img[data-lqip="true"]');
 
   images.forEach(img => {
-    const realSrc = img.dataset.src;
-    if (!realSrc) return;
+    const real = img.dataset.src;
+    if (!real) return;
 
-    // Preload real image
-    const fullImg = new Image();
-    fullImg.src = realSrc;
+    const temp = new Image();
+    temp.src = real;
 
-    fullImg.onload = () => {
-      // Apply small fade transition
-      img.style.transition = "filter .3s ease-out, opacity .3s ease-out";
-
-      // Replace LQIP with full image
-      img.src = realSrc;
-
-      // Remove blur after small delay to avoid flashing
-      setTimeout(() => {
-        img.style.filter = "blur(0)";
-        img.style.opacity = "1";
-      }, 50);
+    temp.onload = () => {
+      img.src = real;
+      img.style.filter = "blur(0)";
+      img.style.opacity = "1";
     };
 
-    // Blur placeholder
+    // start slightly blurred
     img.style.filter = "blur(12px)";
-    img.style.opacity = "0.85";
+    img.style.opacity = "0.9";
   });
 });
