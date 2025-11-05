@@ -28,15 +28,19 @@ layout: page
       <div class="col-md-5">
     <div class="preview-img">
       {% if lqip_url %}
-        <img alt="{{ alt }}"
-             data-lqip="true"
-             src="{{ lqip_url }}"
-             data-src="{{ src }}">
-      {% else %}
-        <img alt="{{ alt }}"
-             src="{{ src }}"
-             loading="lazy">
-      {% endif %}
+<img
+  class="lazyload"
+  src="{{ lqip_url }}"
+  data-src="{{ src }}"
+  data-lqip="true"
+  alt="{{ alt }}"
+>
+{% else %}
+<img
+  src="{{ src }}"
+  alt="{{ alt }}"
+>
+{% endif %}
     </div>
       </div>
       
