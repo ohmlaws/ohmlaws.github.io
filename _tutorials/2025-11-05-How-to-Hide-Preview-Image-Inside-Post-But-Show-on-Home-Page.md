@@ -3,7 +3,8 @@ layout: post
 title: "How to Hide Preview Image Inside Post But Show on Home Page"
 date: 2025-11-05 15:30:42 +0530
 image:
-  path: /assets/img/hide-img.jpg
+  path: /assets/img/hide-img.webp
+  lqip: data:image/webp;base64,UklGRu4AAABXRUJQVlA4IOIAAADwBQCdASoeABQAPpE6mUiloyIhMBgIALASCWwAuy+xeQOMAVQKAD3hkGZrf01oD4sBzjGtV3RiYAD1mFO68kUb9f3ePSsVDCUqHD+0yPhhgKnNVDbcNLqqAIMhOundDmu3xU5rVINr//cUubCYQm2up99Lnlq/Qb/gAKkkH0IGFApMnvSy8HwUKQSIDTMuIKsvTPseDVaVOy8Vs1GRa9a/KjpYILNnjNRtr4UJEjujWCVaEvNvFWC3Jfu8QXcbsgCGilg8qVsZFK2ifxWfoGdPpb1MIO932pZEs9zm5Z2AAAAA
   show_image_in_post: false
 ---
 
