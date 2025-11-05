@@ -1,49 +1,30 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const lazyImages = document.querySelectorAll("img.lazyload");
+document.addEventListener("DOMContentLoaded", () => {
+  const images = document.querySelectorAll('img[data-lqip="true"]');
 
-  if ("IntersectionObserver" in window) {
-    let imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          let img = entry.target;
-          let lqip = img.getAttribute("data-lqip");
-          let src = img.getAttribute("src");
+  images.forEach(img => {
+    const realSrc = img.dataset.src;
+    if (!realSrc) return;
 
-          // Load LQIP first if exists
-          if (lqip) {
-            img.style.filter = "blur(8px)";
-            img.src = lqip;
-          }
+    // Preload real image
+    const fullImg = new Image();
+    fullImg.src = realSrc;
 
-          // Preload full image
-          const fullImg = new Image();
-          fullImg.src = src;
-          fullImg.onload = () => {
-            img.src = src;
-            img.style.transition = "filter 0.4s ease";
-            img.style.filter = "blur(0px)";
-          };
+    fullImg.onload = () => {
+      // Apply small fade transition
+      img.style.transition = "filter .3s ease-out, opacity .3s ease-out";
 
-          observer.unobserve(img);
-        }
-      });
-    });
+      // Replace LQIP with full image
+      img.src = realSrc;
 
-    lazyImages.forEach((img) => {
-      imageObserver.observe(img);
-    });
+      // Remove blur after small delay to avoid flashing
+      setTimeout(() => {
+        img.style.filter = "blur(0)";
+        img.style.opacity = "1";
+      }, 50);
+    };
 
-  } else {
-    // Fallback for old browsers: just switch the src
-    lazyImages.forEach((img) => {
-      let lqip = img.getAttribute("data-lqip");
-      let src = img.getAttribute("src");
-
-      if (lqip) img.src = lqip;
-
-      const fullImg = new Image();
-      fullImg.src = src;
-      fullImg.onload = () => (img.src = src);
-    });
-  }
+    // Blur placeholder
+    img.style.filter = "blur(12px)";
+    img.style.opacity = "0.85";
+  });
 });
