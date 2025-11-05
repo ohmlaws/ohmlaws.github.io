@@ -62,19 +62,29 @@ layout: page
           </div>
 
           <div class="post-meta flex-grow-1 d-flex align-items-end">
-            <div class="me-auto">
-              <i class="far fa-calendar fa-fw me-1"></i>
-              <time>{% include datetime.html date=post.date %}</time>
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                {% include datetime.html date=post.date lang=lang %}
 
-              {% if post.categories %}
-              <i class="far fa-folder-open fa-fw me-1"></i>
-              <span class="categories">
-                {% for c in post.categories %}
-                  {{ c }}{% unless forloop.last %}, {% endunless %}
-                {% endfor %}
-              </span>
+                <!-- categories -->
+                {% if post.categories.size > 0 %}
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    {% for category in post.categories %}
+                      {{ category }}
+                      {%- unless forloop.last -%},{%- endunless -%}
+                    {% endfor %}
+                  </span>
+                {% endif %}
+              </div>
+
+              {% if post.pin %}
+                <div class="pin ms-1">
+                  <i class="fas fa-thumbtack fa-fw"></i>
+                  <span>{{ site.data.locales[lang].post.pin_prompt }}</span>
+                </div>
               {% endif %}
-            </div>
           </div>
 
         </div>
