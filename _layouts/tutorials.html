@@ -25,26 +25,30 @@ layout: page
           {% capture lqip_url %}{% include media-url.html src=post.image.lqip subpath=post.media_subpath %}{% endcapture %}
         {% endif %}
 
-      <div class="col-md-5">
-    <div class="preview-img">
-      {% if lqip_url %}
-<img
-  class="lazyload"
-  src="{{ lqip_url }}"
-  data-src="{{ src }}"
-  data-lqip="true"
-  alt="{{ alt }}"
->
-{% else %}
-<img
-  src="{{ src }}"
-  alt="{{ alt }}"
->
-{% endif %}
-    </div>
-      </div>
-      
-      {% assign card_body_col = '7' %}
+        <div class="col-md-5">
+          <div class="preview-img">
+            {% if lqip_url %}
+              <!-- LQIP present: src = lqip, data-src = real -->
+              <img
+                class="tutorial-lqip"
+                alt="{{ alt }}"
+                src="{{ lqip_url }}"
+                data-src="{{ src }}"
+                data-has-lqip="true"
+              >
+            {% else %}
+              <!-- No LQIP: show real image directly -->
+              <img
+                class="tutorial-no-lqip"
+                alt="{{ alt }}"
+                src="{{ src }}"
+                loading="lazy"
+              >
+            {% endif %}
+          </div>
+        </div>
+
+        {% assign card_body_col = '7' %}
       {% endif %}
 
       <div class="col-md-{{ card_body_col }}">
@@ -80,6 +84,5 @@ layout: page
   {% endfor %}
 </div>
 
-{% if site.lazyload %}
+<!-- include the lazyloader script (unconditional here for reliability) -->
 <script defer src="{{ '/assets/js/img-lazyload.js' | relative_url }}"></script>
-{% endif %}
