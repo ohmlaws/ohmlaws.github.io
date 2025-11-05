@@ -35,7 +35,9 @@ then combine so pinned items appear first.
           {% endif %}
 
           <div class="col-md-5">
-            <img src="{{ src }}" alt="{{ alt }}" {{ lqip }}>
+  <div class="preview-img">
+    <img src="{{ src }}" alt="{{ alt }}" {{ lqip }}>
+  </div>
           </div>
 
           {% assign card_body_col = '7' %}
