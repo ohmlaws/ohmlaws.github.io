@@ -26,11 +26,20 @@ layout: page
         {% endif %}
 
       <div class="col-md-5">
-        <div class="preview-img">
-          <img class="lazyload" alt="{{ alt }}" src="{{ src }}" {% if lqip_url %}data-lqip="{{ lqip_url }}"{% endif %}>
-        </div>
+    <div class="preview-img">
+      {% if lqip_url %}
+        <img alt="{{ alt }}"
+             data-lqip="true"
+             src="{{ lqip_url }}"
+             data-src="{{ src }}">
+      {% else %}
+        <img alt="{{ alt }}"
+             src="{{ src }}"
+             loading="lazy">
+      {% endif %}
+    </div>
       </div>
-
+      
       {% assign card_body_col = '7' %}
       {% endif %}
 
