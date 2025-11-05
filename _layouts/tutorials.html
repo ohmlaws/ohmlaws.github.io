@@ -11,6 +11,7 @@ layout: page
 
 <div id="post-list" class="flex-grow-1 px-xl-1">
   {% for post in posts %}
+  {% assign lqip_url = nil %}
   <article class="card-wrapper card">
     <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
 
