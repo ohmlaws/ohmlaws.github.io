@@ -32,10 +32,16 @@
   display: block;
   width: 100%;
   height: auto;
+  filter: blur(8px);
+  opacity: .5;
   transition: filter .35s ease, opacity .35s ease;
   will-change: filter, opacity;
 }
 
+.preview-img img.loaded {
+  filter: blur(0);
+  opacity: 1;
+}
 // Back-to-top progress bar
 #progress-circle {
   margin: -1px -1px;
