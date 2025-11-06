@@ -7,11 +7,17 @@
     const highRes = new Image();
     highRes.src = realSrc;
 
+    // Ensure transition works even for cached images
     highRes.onload = function () {
-      img.src = realSrc;
-      img.classList.add("loaded"); // triggers CSS fade transition
-      img.removeAttribute("data-src");
+      // Small delay so LQIP stays visible briefly
+      setTimeout(() => {
+        img.src = realSrc;
+        img.classList.add("loaded"); // trigger CSS fade
+        img.removeAttribute("data-src");
+      }, 500); // adjust this (300–700ms) for desired delay
     };
+
+    if (highRes.complete) highRes.onload();
   }
 
   function initLazyLoad() {
@@ -25,7 +31,7 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { rootMargin: "200px 0px" });
+      }, { rootMargin: "50px 0px" }); // load just before visible
 
       lazyImgs.forEach(img => io.observe(img));
     } else {
