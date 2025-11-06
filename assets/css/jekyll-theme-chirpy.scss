@@ -28,25 +28,27 @@
   color: #25D366 !important;
 }
 
-/* --- Smooth LQIP transition --- */
+/* --- Smooth LQIP transition (Enhanced) --- */
 .preview-img img {
   display: block;
   width: 100%;
-  height: auto;
-  border-radius: 0.5rem; /* optional: keep Chirpy’s rounded corners */
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity, filter;
+  height: 100%;
+  border-radius: 0.5rem; /* keep Chirpy’s rounded corners */
+  transition: opacity 1.2s ease-in-out,
+              filter 1.2s ease-in-out,
+              transform 1.2s ease-in-out;
+  will-change: opacity, filter, transform;
 }
 
-/* Start state (LQIP image) */
+/* Start state (blurred LQIP) */
 img[data-has-lqip="true"] {
-  filter: blur(12px);
-  opacity: 0.7;
-  transform: scale(1.01);
+  filter: blur(15px);
+  opacity: 0.6;
+  transform: scale(1.03);
+  transition: none; /* Prevent early animation */
 }
 
-/* End state (when loaded) */
+/* End state (high-res loaded) */
 img[data-has-lqip="true"].loaded {
   filter: blur(0);
   opacity: 1;
