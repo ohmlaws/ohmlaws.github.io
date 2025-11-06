@@ -27,26 +27,25 @@ layout: page
         {% endif %}
 
         <div class="col-md-5">
-          <div class="preview-img">
-            {% if lqip_url %}
-              <!-- LQIP present: src = lqip, data-src = real -->
-              <img
-                class="tutorial-lqip"
-                alt="{{ alt }}"
-                src="{{ lqip_url }}"
-                data-src="{{ src }}"
-                data-has-lqip="true"
-              >
-            {% else %}
-              <!-- No LQIP: show real image directly -->
-              <img
-                class="tutorial-no-lqip"
-                alt="{{ alt }}"
-                src="{{ src }}"
-                loading="lazy"
-              >
-            {% endif %}
-          </div>
+  <div class="preview-img {% if lqip_url %}blur{% else %}shimmer{% endif %}">
+    {% if lqip_url %}
+      <!-- With LQIP -->
+      <img
+        alt="{{ alt }}"
+        src="{{ lqip_url }}"
+        data-src="{{ src }}"
+        data-lqip="true"
+        loading="lazy"
+      >
+    {% else %}
+      <!-- Without LQIP -->
+      <img
+        alt="{{ alt }}"
+        src="{{ src }}"
+        loading="lazy"
+      >
+    {% endif %}
+  </div>
         </div>
 
         {% assign card_body_col = '7' %}
