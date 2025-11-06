@@ -13,73 +13,195 @@ If you want to display posts from a separate folder on a **different home page**
 
 ## Step 1: Create a New Layout File
 
-In your `_layouts` folder, create a new layout file for your new collection posts.
+In your `_layouts` folder, create a new layout file for your new collection posts. If your repository not having any `_layout` folder , create one at root.
 
 **Example:**  
 `_layouts/tutorials.html`
 
 Add the following code inside it:
 {% raw %}
-```Markdown
+```liquid
 ---
 layout: page
 ---
 
-{{ content }}
+{% include lang.html %}
+
+{% assign tutorials_sorted = site.tutorials | sort: "date" | reverse %}
+{% assign pinned = tutorials_sorted | where: "pin", true %}
+{% assign normal = tutorials_sorted | where_exp: "item", "item.pin != true and item.hidden != true" %}
+{% assign posts = pinned | concat: normal %}
 
 <div id="post-list" class="flex-grow-1 px-xl-1">
-  {% for post in site.tutorials %}
-    <article class="card-wrapper card">
-      <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
-        {% assign card_body_col = '12' %}
+  {% for post in posts %}
+  {% assign lqip_url = nil %}
+  <article class="card-wrapper card">
+    <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
 
-        {% if post.image %}
-          {% assign src = post.image.path | default: post.image %}
-          {% capture src %}{% include media-url.html src=src subpath=post.media_subpath %}{% endcapture %}
-          {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
-          {% assign lqip = null %}
+      {% assign card_body_col = '12' %}
 
-          {% if post.image.lqip %}
-            {% capture lqip_url %}{% include media-url.html src=post.image.lqip subpath=post.media_subpath %}{% endcapture %}
-            {% assign lqip = 'lqip="' | append: lqip_url | append: '"' %}
-          {% endif %}
+      {% if post.image %}
+        {% assign src = post.image.path | default: post.image %}
+        {% capture src %}{% include media-url.html src=src subpath=post.media_subpath %}{% endcapture %}
+        {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
 
-          <div class="col-md-5">
-            <div class="preview-img">
-              <img src="{{ src }}" alt="{{ alt }}" {{ lqip }}>
-            </div>
-          </div>
-
-          {% assign card_body_col = '7' %}
+        {% if post.image.lqip %}
+          {% capture lqip_url %}{% include media-url.html src=post.image.lqip subpath=post.media_subpath %}{% endcapture %}
         {% endif %}
 
-        <div class="col-md-{{ card_body_col }}">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">{{ post.title }}</h1>
-            <div class="card-text content mt-0 mb-3">
-              <p>{% include post-description.html %}</p>
-            </div>
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <i class="far fa-calendar fa-fw me-1"></i>{{ post.date | date: "%b %-d, %Y" }}
-              </div>
-            </div>
+        <div class="col-md-5">
+          <div class="preview-img">
+            {% if lqip_url %}
+              <!-- LQIP present: src = lqip, data-src = real -->
+              <img
+                class="tutorial-lqip"
+                alt="{{ alt }}"
+                src="{{ lqip_url }}"
+                data-src="{{ src }}"
+                data-has-lqip="true"
+              >
+            {% else %}
+              <!-- No LQIP: show real image directly -->
+              <img
+                class="tutorial-no-lqip"
+                alt="{{ alt }}"
+                src="{{ src }}"
+                loading="lazy"
+              >
+            {% endif %}
           </div>
         </div>
-      </a>
-    </article>
+
+        {% assign card_body_col = '7' %}
+      {% endif %}
+
+      <div class="col-md-{{ card_body_col }}">
+        <div class="card-body d-flex flex-column">
+
+          <h1 class="card-title my-2 mt-md-0">{{ post.title }}</h1>
+
+          <div class="card-text content mt-0 mb-3">
+            <p>{% include post-summary.html %}</p>
+          </div>
+
+          <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                {% include datetime.html date=post.date lang=lang %}
+
+                <!-- categories -->
+                {% if post.categories.size > 0 %}
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    {% for category in post.categories %}
+                      {{ category }}
+                      {%- unless forloop.last -%},{%- endunless -%}
+                    {% endfor %}
+                  </span>
+                {% endif %}
+              </div>
+
+              {% if post.pin %}
+                <div class="pin ms-1">
+                  <i class="fas fa-thumbtack fa-fw"></i>
+                  <span>{{ site.data.locales[lang].post.pin_prompt }}</span>
+                </div>
+              {% endif %}
+          </div>
+
+        </div>
+      </div>
+
+    </a>
+  </article>
   {% endfor %}
 </div>
+
+<!-- include the lazyloader script (unconditional here for reliability) -->
+<script defer src="{{ '/assets/js/img-lazyload.js' | relative_url }}"></script>
 ```
 {% endraw %}
-> Make sure this part:
-{% raw %} {% for post in site.tutorials %} {% endraw %}
-matches the collection name you’ll create in the next step.
-{: .prompt-warning }
 
 ---
 
-## Step 2: Create a Folder for Your New Collection
+## Step 2: Create a file in `assets/js` with following code snippet
+`img-lazyload.js`
+
+{% raw %}
+```liquid
+(function () {
+
+  function swapToReal(img) {
+    const realSrc = img.dataset.src;
+    if (!realSrc) return;
+
+    const tmp = new Image();
+    tmp.src = realSrc;
+    tmp.onload = () => {
+      img.src = realSrc;
+      img.classList.add("loaded"); // Trigger CSS transition
+      img.removeAttribute("data-src");
+    };
+  }
+
+  function init() {
+    const imgs = document.querySelectorAll("img[data-has-lqip='true']");
+
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            swapToReal(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: "200px 0px" });
+
+      imgs.forEach(img => io.observe(img));
+    } else {
+      imgs.forEach(img => swapToReal(img));
+    }
+  }
+
+  document.readyState === "loading"
+    ? document.addEventListener("DOMContentLoaded", init)
+    : init();
+})();
+
+```
+{% endraw %}
+
+---
+
+## Step 3: Add following css in `assets/css/jekyll-theme-chirpy.scss`
+
+```css
+/* Default: no blur for normal images */
+.preview-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: filter .35s ease, opacity .35s ease;
+  will-change: filter, opacity;
+}
+
+/* Apply blur ONLY if LQIP exists */
+.preview-img img[data-has-lqip="true"]:not(.loaded) {
+  filter: blur(10px);
+  opacity: .7;
+}
+
+/* Once loaded (JS adds .loaded) */
+.preview-img img.loaded {
+  filter: blur(0);
+  opacity: 1;
+}
+```
+
+---
+
+## Step 4: Create a Folder for Your New Collection
 
 In your project root, create a folder that starts with an underscore (_).
 
@@ -101,7 +223,7 @@ And then the content of the post below it.
 
 ---
 
-## Step 3: Create a Home Page File for the New Collection
+## Step 5: Create a Home Page File for the New Collection
 
 In your project root, create a Markdown file with the same name as your folder, but without the underscore.
 
@@ -121,7 +243,7 @@ This file will serve as the new `home page` for your collection.
 
 ---
 
-## Step 4: Update `_config.yml`
+## Step 6: Update `_config.yml`
 
 Now open `_config.yml` and scroll to the bottom of the file.
 
@@ -168,7 +290,7 @@ values:
 
 ---
 
-## Step 5: Add a Post to Your New Collection
+## Step 7: Add a Post to Your New Collection
 
 Now go to your `_tutorials` folder and create your first post. For example:
 
@@ -188,7 +310,7 @@ Then write your content below it.
 ```
 ---
 
-## Step 6: Test Your New Collection
+## Step 8: Test Your New Collection
 
 Build and Serve Your Jekyll Site.
 You should see your new collection posts displayed, styled similarly to your main home page.
