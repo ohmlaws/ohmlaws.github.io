@@ -33,22 +33,21 @@
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: 0.5rem; /* keep Chirpy’s rounded corners */
-  transition: opacity 1.2s ease-in-out,
-              filter 1.2s ease-in-out,
-              transform 1.2s ease-in-out;
-  will-change: opacity, filter, transform;
+  border-radius: 0.5rem;
+  transition:
+    opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, filter;
 }
 
-/* Start state (blurred LQIP) */
+/* Initial blur (LQIP) */
 img[data-has-lqip="true"] {
-  filter: blur(15px);
+  filter: blur(12px);
   opacity: 0.6;
-  transform: scale(1.03);
-  transition: none; /* Prevent early animation */
+  transform: scale(1.01);
 }
 
-/* End state (high-res loaded) */
+/* After real image loads */
 img[data-has-lqip="true"].loaded {
   filter: blur(0);
   opacity: 1;
