@@ -28,32 +28,54 @@
   color: #25D366 !important;
 }
 
-/* --- Smooth LQIP transition (Enhanced) --- */
-.preview-img img {
-  display: block;
+/* Base preview image container */
+.preview-img {
+  aspect-ratio: 40 / 21;
   width: 100%;
   height: 100%;
-  border-radius: 0.5rem; /* Matches common Chirpy styles */
-  will-change: opacity, filter, transform; /* Optimize performance */
-  /* Combine transitions into one declaration for cleaner code */
-  transition:
-    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    filter 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border-radius: 0.5rem;
+  transition: background 0.3s ease;
 }
 
-/* Initial state (LQIP) */
-img[data-has-lqip="true"] {
-  filter: blur(12px); /* You can adjust this value */
-  opacity: 0.6;
-  transform: scale(1.05); /* Slight initial zoom helps the effect */
+/* Image styling */
+.preview-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: filter, opacity;
 }
 
-/* Final state (Real image loaded) */
-img[data-has-lqip="true"].loaded {
-  filter: blur(0); /* Removes the blur smoothly */
-  opacity: 1; /* Fades in to full opacity */
-  transform: scale(1); /* Zooms out smoothly to normal size */
+/* Shimmer effect (for non-LQIP images) */
+.preview-img.shimmer {
+  background: linear-gradient(
+    110deg,
+    #f6f7f8 8%,
+    #edeef1 18%,
+    #f6f7f8 33%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+/* Blur cover (for LQIP) */
+.preview-img.blur img {
+  filter: blur(15px);
+  opacity: 0.7;
+}
+
+/* After real image loads */
+.preview-img img {
+  filter: blur(0);
+  opacity: 1;
 }
 
 
