@@ -1,38 +1,42 @@
+// /assets/js/img-lazyload.js
 (function () {
-
-  function swapToReal(img) {
+  function loadRealImage(img) {
     const realSrc = img.dataset.src;
     if (!realSrc) return;
 
-    const tmp = new Image();
-    tmp.src = realSrc;
-    tmp.onload = () => {
+    const highRes = new Image();
+    highRes.src = realSrc;
+
+    highRes.onload = function () {
       img.src = realSrc;
-      img.classList.add("loaded"); // Trigger CSS transition
+      img.classList.add("loaded"); // triggers CSS fade transition
       img.removeAttribute("data-src");
     };
   }
 
-  function init() {
-    const imgs = document.querySelectorAll("img[data-has-lqip='true']");
+  function initLazyLoad() {
+    const lazyImgs = document.querySelectorAll('img[data-has-lqip="true"]');
 
     if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver((entries, obs) => {
+      const io = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            swapToReal(entry.target);
-            obs.unobserve(entry.target);
+            loadRealImage(entry.target);
+            observer.unobserve(entry.target);
           }
         });
       }, { rootMargin: "200px 0px" });
 
-      imgs.forEach(img => io.observe(img));
+      lazyImgs.forEach(img => io.observe(img));
     } else {
-      imgs.forEach(img => swapToReal(img));
+      // Fallback for old browsers
+      lazyImgs.forEach(loadRealImage);
     }
   }
 
-  document.readyState === "loading"
-    ? document.addEventListener("DOMContentLoaded", init)
-    : init();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLazyLoad);
+  } else {
+    initLazyLoad();
+  }
 })();
