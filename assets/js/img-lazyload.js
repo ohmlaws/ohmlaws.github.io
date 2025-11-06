@@ -1,48 +1,75 @@
-// /assets/js/img-lazyload.js
-(function () {
-  function loadRealImage(img) {
-    const realSrc = img.dataset.src;
-    if (!realSrc) return;
+/**
+ * Lazy load & smooth LQIP transition (custom Chirpy adaptation)
+ */
 
-    const highRes = new Image();
-    highRes.src = realSrc;
+const ATTR_DATA_SRC = 'data-src';
+const ATTR_DATA_LQIP = 'data-lqip';
 
-    // Ensure transition works even for cached images
-    highRes.onload = function () {
-      // Small delay so LQIP stays visible briefly
-      setTimeout(() => {
-        img.src = realSrc;
-        img.classList.add("loaded"); // trigger CSS fade
-        img.removeAttribute("data-src");
-      }, 500); // adjust this (300–700ms) for desired delay
-    };
+const cover = {
+  SHIMMER: 'shimmer',
+  BLUR: 'blur'
+};
 
-    if (highRes.complete) highRes.onload();
-  }
+function removeCover(cls) {
+  const wrapper = this.closest('.preview-img');
+  if (wrapper) wrapper.classList.remove(cls);
+}
 
-  function initLazyLoad() {
-    const lazyImgs = document.querySelectorAll('img[data-has-lqip="true"]');
+function handleImage() {
+  if (!this.complete) return;
 
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            loadRealImage(entry.target);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { rootMargin: "50px 0px" }); // load just before visible
-
-      lazyImgs.forEach(img => io.observe(img));
-    } else {
-      // Fallback for old browsers
-      lazyImgs.forEach(loadRealImage);
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initLazyLoad);
+  if (this.hasAttribute(ATTR_DATA_LQIP)) {
+    removeCover.call(this, cover.BLUR);
   } else {
-    initLazyLoad();
+    removeCover.call(this, cover.SHIMMER);
   }
-})();
+}
+
+/**
+ * Switches the LQIP (low-res) image with the real image URL.
+ */
+function switchLQIP() {
+  const src = this.getAttribute(ATTR_DATA_SRC);
+  if (src) {
+    this.setAttribute('src', encodeURI(src));
+    this.removeAttribute(ATTR_DATA_SRC);
+  }
+}
+
+/**
+ * Initialize lazy loading for tutorial preview images
+ */
+function loadImg() {
+  const images = document.querySelectorAll('.preview-img img');
+
+  if (images.length === 0) return;
+
+  images.forEach((img) => {
+    img.addEventListener('load', handleImage);
+  });
+
+  // Handle cached images
+  document.querySelectorAll('.preview-img img[loading="lazy"]').forEach((img) => {
+    if (img.complete) {
+      if (img.hasAttribute(ATTR_DATA_LQIP)) {
+        removeCover.call(img, cover.BLUR);
+      } else {
+        removeCover.call(img, cover.SHIMMER);
+      }
+    }
+  });
+
+  // Process all LQIP images and swap in high-res
+  const lqips = document.querySelectorAll(`.preview-img img[${ATTR_DATA_LQIP}="true"]`);
+
+  if (lqips.length) {
+    lqips.forEach((img) => {
+      // Add slight delay for smooth visual load
+      setTimeout(() => {
+        switchLQIP.call(img);
+      }, 250); // adjust for slower fade
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadImg);
