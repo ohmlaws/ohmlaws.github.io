@@ -1,5 +1,3 @@
-<!-- The Footer -->
-
 <footer
   aria-label="Site Info"
   class="
@@ -7,8 +5,9 @@
     flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
   "
 >
-  <p>
-    {{- '©' }}
+  <div class="footer-left">
+    <p class="mb-1">
+      {{- '©' }}
     <time>{{ 'now' | date: '%Y' }}</time>
 
     {% if site.social.links %}
@@ -26,12 +25,27 @@
         {{- site.data.locales[include.lang].copyright.brief -}}
       </span>
     {% endif %}
-  </p>
-<p>
-    <span> <a href="https://ohmlaws.github.io/uptime">Uptime Status</a> | <a href="https://ohmlaws.github.io/tutorials">Tutorials</a> | <a href="https://ohmlaws.github.io/Privacy-Policy">Privacy-Policy</a> | <a href="https://ohmlaws.github.io/faq">FAQ</a> </span>
-</p>
-<p>
-    {%- capture _platform -%}
+    </p>
+  </div>
+
+  <div class="footer-center text-center">
+    <p style="font-size:1em">
+      <a href="https://ohmlaws.github.io/resistor">Resistance Calculator</a> | 
+      <a href="https://ohmlaws.github.io/uptime">Uptime Status</a> | 
+      <a href="https://ohmlaws.github.io/tutorials">Tutorials</a> | 
+      <a href="https://ohmlaws.github.io/faq">FAQ</a> | 
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeIvBGzPXlJiYrUlBTd2FK2UNeOa8Vd8mTn7YuDQSGXs-MNnw/viewform?embedded=true" target="_blank" rel="noopener">Feedback</a>
+    </p>
+    <p style="font-size:1em">
+      <a href="https://ohmlaws.github.io/Privacy-Policy">Privacy Policy</a> | 
+      <a href="https://ohmlaws.github.io/terms">Terms of Service</a> | 
+      <a href="https://github.com/ohmlaws/ohmlaws.github.io/issues" target="_blank">Content Corrections</a>
+    </p>
+  </div>
+
+  <div class="footer-right text-lg-end">
+    <p class="small" style="margin-bottom:1em">
+      {%- capture _platform -%}
       <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
     {%- endcapture -%}
 
@@ -47,6 +61,7 @@
     {%- endcapture -%}
 
     {{ site.data.locales[include.lang].meta | replace: ':PLATFORM', _platform | replace: ':THEME', _theme }}
-</p>
+    </p>
+  </div>
   
-</footer>
+  </footer>
