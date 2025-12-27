@@ -1,6 +1,6 @@
 name: Content Correction
 description: Report a spelling mistake or incorrect question/answer on the site.
-title: "Content Error: [Brief Description]"
+title: "Content Correction:"
 labels:
   - Content Correction
 body:
