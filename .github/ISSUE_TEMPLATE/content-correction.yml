@@ -1,0 +1,48 @@
+name: Content Correction
+description: Report a spelling mistake or incorrect question/answer on the site.
+title: "Content Error: [Brief Description]"
+labels:
+  - Content Correction
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Thanks for helping us keep our content accurate! 
+        Please fill out the details below so we can get this fixed quickly.
+  - type: dropdown
+    id: error-type
+    attributes:
+      label: Type of Error
+      options:
+        - Spelling/Grammar Mistake
+        - Incorrect Answer to a Question
+        - Factually Incorrect Information
+        - Broken Link/Missing Image
+    validations:
+      required: true
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL
+      description: The full link to the page where the error is located.
+      placeholder: "https://mysite.com/lesson-1"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the Error
+      placeholder: "e.g., The answer to Question 5 says 'A' but it should be 'B' because..."
+    validations:
+      required: true
+  - type: textarea
+    id: suggested-fix
+    attributes:
+      label: Suggested Correction
+      placeholder: "The correct information should be..."
+  - type: checkboxes
+    id: visual-proof
+    attributes:
+      label: Evidence
+      options:
+        - label: I have attached a screenshot (drag and drop into this issue).
