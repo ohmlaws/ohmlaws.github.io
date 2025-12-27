@@ -1,7 +1,7 @@
 ---
-# the default layout is 'page'
-icon: fas fa-circle-question
-order: 5
+layout: post
+title: FAQ
+date: 2025-05-12 20:26:00 +0530
 ---
 
 #  Frequently Asked Questions
