@@ -1,7 +1,7 @@
 ---
-layout: post
-title: Terms of Service
-date: 2025-12-26 20:25:00 +0530
+icon: fas fa-info-circle
+order: 5
+permalink: /terms/
 ---
 
 # Terms of Service
