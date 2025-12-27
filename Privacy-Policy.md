@@ -1,7 +1,7 @@
 ---
-# the default layout is 'page'
-icon: fas fa-user-lock
-order: 4
+layout: post
+title: Privacy Policy
+date: 2025-05-12 20:25:00 +0530
 ---
 
 # Privacy Policy
