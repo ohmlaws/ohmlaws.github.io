@@ -97,12 +97,11 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://roniui.github.io/assets/images/people/avatar.png
+avatar: https://ohmlaws.github.io/assets/img/avatar.png
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-social_preview_image: https://roniui.github.io/assets/images/people/avatar.png
-
+social_preview_image: https://ohmlaws.github.io/assets/img/avatar.png
 # boolean type, the global switch for TOC in posts.
 toc: true
 
