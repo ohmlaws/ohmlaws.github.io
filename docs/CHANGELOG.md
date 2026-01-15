@@ -4,9 +4,10 @@ This changelog documents notable changes to [ohmlaws.github.io](https://github.c
 
 > For theme-level updates, refer to the Chirpy theme [changelog](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/CHANGELOG.md)
 
-Last Updated: 2026-01-15
+Last Updated: 2026-01-16
 
 ## 2026-01-16
+- Update changelog header to include timezone ([ce3bb6d](https://github.com/ohmlaws/ohmlaws.github.io/commit/ce3bb6d54395ac033139821622abcf21a0497dd4))
 - Refactor changelog generation workflow ([ffc731a](https://github.com/ohmlaws/ohmlaws.github.io/commit/ffc731a50311d6c050bbefeeeebd299565025964))
 - Create update_changelog.yml ([94a9a56](https://github.com/ohmlaws/ohmlaws.github.io/commit/94a9a562340ef880643f59fd39fd245d52dad7dd))
 
