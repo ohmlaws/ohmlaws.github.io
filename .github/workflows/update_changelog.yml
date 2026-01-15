@@ -26,7 +26,7 @@ jobs:
           
           REPO_URL="https://github.com/${{ github.repository }}"
           
-          # --- FIXED HEADER SECTION (SAFER METHOD) ---
+          # --- FIXED HEADER WITH TIMEZONE ---
           cat <<EOF > docs/CHANGELOG.md
           # Changelog
 
@@ -34,7 +34,7 @@ jobs:
 
           > For theme-level updates, refer to the Chirpy theme [changelog](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/CHANGELOG.md)
 
-          Last Updated: $(date +'%Y-%m-%d')
+          Last Updated: $(TZ='Asia/Kolkata' date +'%Y-%m-%d')
           EOF
           # --- END OF HEADER ---
           
