@@ -23,6 +23,4 @@ This project is based on the [Chirpy Starter](https://github.com/cotes2020/chirp
 
 ##  Version History
 
-All updates are tracked informally in the [Changelog](CHANGELOG.md) for transparency and future reference.
-
 For core theme updates, refer to the original [Chirpy theme changelog](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/CHANGELOG.md)
