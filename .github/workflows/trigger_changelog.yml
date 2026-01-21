@@ -1,0 +1,19 @@
+name: Signal Changelog Update
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ping-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ring the Doorbell
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.MY_PAT }}
+          repository: ohmlaws/ohmlaws-changelog
+          event-type: update_request
+          # This sends the repo name (e.g., "ohmlaws/project-alpha") to the hub
+          client-payload: '{"source_repo": "${{ github.repository }}"}'
