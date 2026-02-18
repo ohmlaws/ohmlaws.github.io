@@ -284,7 +284,7 @@ Then write your content below it.
 ```
 ---
 
-> As of now `No new category,tags` supported for new collections folder pages, you can use your previously used category,tags from your `_posts` pages.
+> As of now `No new category,tags` are supported for new collections folder pages, you can use your previously used category,tags from your `_posts` pages.
 {: .prompt-warning }
 
 ---
