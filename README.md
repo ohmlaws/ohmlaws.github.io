@@ -62,6 +62,13 @@ This is an educational blog built with Chirpy, a feature-rich and minimal theme 
 
 ---
 
+## Changelog 
+Ohmlaws.github.io-[CHANGELOG](https://github.com/ohmlaws/ohmlaws-changelog/blob/main/docs/CHANGELOG_ohmlaws_ohmlaws.github.io.md)
+
+For theme-level updates, refer to the Chirpy theme [changelog](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/CHANGELOG.md)
+
+---
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).

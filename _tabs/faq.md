@@ -1,7 +1,7 @@
 ---
 # the default layout is 'page'
 icon: fas fa-circle-question
-order: 5
+order: 6
 ---
 
 #  Frequently Asked Questions
