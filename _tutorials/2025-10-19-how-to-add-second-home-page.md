@@ -16,7 +16,7 @@ If you want to display posts from a separate folder on a **different home page**
 In your `_layouts` folder, create a new layout file for your new collection posts. If your repository not having any `_layout` folder , create one at root.
 
 **Example:**  
-`_layouts/tutorials.html`
+[_layouts/tutorials.html](https://github.com/ohmlaws/ohmlaws.github.io/blob/main/_layouts/tutorials.html)
 
 Add the following code inside it:
 {% raw %}
@@ -33,73 +33,46 @@ layout: page
 {% assign posts = pinned | concat: normal %}
 
 <div id="post-list" class="flex-grow-1 px-xl-1">
-  {% for post in posts %}
-  {% assign lqip_url = nil %}
-  <article class="card-wrapper card">
-    <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
+  {% for post in site.tutorials reversed %}  
+    <article class="card-wrapper card">
+      <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
+        {% assign card_body_col = '12' %}
 
-      {% assign card_body_col = '12' %}
+        {% if post.image %}
+          {% assign src = post.image.path | default: post.image %}
+          {% capture src %}{% include media-url.html src=src subpath=post.media_subpath %}{% endcapture %}
 
-      {% if post.image %}
-        {% assign src = post.image.path | default: post.image %}
-        {% capture src %}{% include media-url.html src=src subpath=post.media_subpath %}{% endcapture %}
-        {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
+          {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
+
+          {% assign lqip = null %}
+
+          {% if post.image.lqip %}
+            {% capture lqip_url %}{% include media-url.html src=post.image.lqip subpath=post.media_subpath %}{% endcapture %}
+            {% assign lqip = 'lqip="' | append: lqip_url | append: '"' %}
+          {% endif %}
+
+          <div class="col-md-5">
+            <div class="preview-img">
+  <img src="{{ src }}" alt="{{ alt }}" {{ lqip }}>
+          </div>
+          </div>
 
         {% if post.image.lqip %}
           {% capture lqip_url %}{% include media-url.html src=post.image.lqip subpath=post.media_subpath %}{% endcapture %}
         {% endif %}
 
-        <div class="col-md-5">
-          <div class="preview-img">
-            {% if lqip_url %}
-              <!-- LQIP present: src = lqip, data-src = real -->
-              <img
-                class="tutorial-lqip"
-                alt="{{ alt }}"
-                src="{{ lqip_url }}"
-                data-src="{{ src }}"
-                data-has-lqip="true"
-              >
-            {% else %}
-              <!-- No LQIP: show real image directly -->
-              <img
-                class="tutorial-no-lqip"
-                alt="{{ alt }}"
-                src="{{ src }}"
-                loading="lazy"
-              >
-            {% endif %}
-          </div>
-        </div>
+        <div class="col-md-{{ card_body_col }}">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">{{ post.title }}</h1>
 
-        {% assign card_body_col = '7' %}
-      {% endif %}
+            <div class="card-text content mt-0 mb-3">
+              <p>{% include post-summary.html %}</p>
+            </div>
 
-      <div class="col-md-{{ card_body_col }}">
-        <div class="card-body d-flex flex-column">
-
-          <h1 class="card-title my-2 mt-md-0">{{ post.title }}</h1>
-
-          <div class="card-text content mt-0 mb-3">
-            <p>{% include post-summary.html %}</p>
-          </div>
-
-          <div class="post-meta flex-grow-1 d-flex align-items-end">
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
               <div class="me-auto">
-                <!-- posted date -->
                 <i class="far fa-calendar fa-fw me-1"></i>
-                {% include datetime.html date=post.date lang=lang %}
-
-                <!-- categories -->
-                {% if post.categories.size > 0 %}
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    {% for category in post.categories %}
-                      {{ category }}
-                      {%- unless forloop.last -%},{%- endunless -%}
-                    {% endfor %}
-                  </span>
-                {% endif %}
+{{ post.date | date: "%b %-d, %Y" }}
               </div>
 
               {% if post.pin %}
@@ -251,9 +224,10 @@ Now open `_config.yml` and scroll to the bottom of the file.
 
 Look for something like:
 ```
- tabs:
-  output: true
-  sort_by: order 
+collections:
+  tabs:
+    output: true
+    sort_by: order 
   ```
 
 `Then add your new collection just after`
@@ -310,7 +284,12 @@ Then write your content below it.
 ```
 ---
 
-## Step 8: Test Your New Collection
+> As of now `No new category,tags` are supported for new collections folder pages, you can use your previously used category,tags from your `_posts` pages.
+{: .prompt-warning }
+
+---
+
+## Step 6: Test Your New Collection
 
 Build and Serve Your Jekyll Site.
 You should see your new collection posts displayed, styled similarly to your main home page.
