@@ -100,3 +100,23 @@
     transition: stroke-dashoffset 0.2s;
   }
 }
+
+/* Hide the date on individual post pages */
+.post-meta span:has(time) {
+    display: none !important;
+}
+
+/* Hide the date on the homepage feed and lists */
+.post-meta time {
+    display: none !important;
+}
+
+/* Hide the calendar icon */
+.post-meta .fa-calendar {
+    display: none !important;
+}
+
+/* Hide date on Further Reading area */
+.card-body time {
+    display: none !important;
+}
