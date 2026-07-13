@@ -1,0 +1,52 @@
+<!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+
+  functionality to extract and highlight matched snippets in search results added <https://github.com/ohmlaws/ohmlaws.github.io> 
+-->
+
+{% capture result_elem %}
+  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">
+    <header>
+      <h2><a href="{url}">{title}</a></h2>
+      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">{categories}{tags}</div>
+    </header>
+    <p>{content}</p>
+  </article>
+{% endcapture %}
+{% capture not_found %}<p class="mt-5">{{ site.data.locales[include.lang].search.no_results }}</p>{% endcapture %}
+<script>
+  function escapeRegExp(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  document.addEventListener('DOMContentLoaded', () => {
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('search-results'),
+      json: '{{ "/assets/js/data/search.json" | relative_url }}',
+      searchResultTemplate: '{{ result_elem | strip_newlines }}',
+      noResultsText: '{{ not_found }}',
+      templateMiddleware: function(prop, value) {
+        const term = document.getElementById('search-input').value.trim();
+        if (prop === 'categories') return value ? `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>` : value;
+        if (prop === 'tags') return value ? `<div><i class="fa fa-tag fa-fw"></i>${value}</div>` : value;
+        if (prop === 'content') {
+          if (term && value) {
+            const regex = new RegExp(`(${escapeRegExp(term)})`, 'gi');
+            const match = regex.exec(value);
+            if (match) {
+              let start = Math.max(0, match.index - 100);
+              let end = Math.min(value.length, match.index + match[0].length + 100);
+              if (start > 0) start = value.indexOf(' ', start) + 1 || start;
+              if (end < value.length) end = value.lastIndexOf(' ', end) || end;
+              let snippet = value.substring(start, end);
+              if (start > 0) snippet = '...' + snippet;
+              if (end < value.length) snippet += '...';
+              return snippet.replace(regex, '<mark class="bg-warning text-dark">$1</mark>');
+            }
+          }
+          return value.length > 150 ? value.substring(0, 150) + '...' : value;
+        }
+        if (prop === 'url') return term ? `${value}#:~:text=${encodeURIComponent(term)}` : value;
+      }
+    });
+  });
+</script>
