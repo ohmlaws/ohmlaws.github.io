@@ -19,7 +19,12 @@
 {% capture not_found %}<p class="mt-5">{{ site.data.locales[include.lang].search.no_results }}</p>{% endcapture %}
 
 <script>
-  {% comment %} Note: dependent library will be loaded in `js-selector.html` {% endcomment %}
+  // IMPROVEMENT 1: Helper function to safely escape regex characters 
+  // (Prevents site breaking if someone searches for "C++" or "array[0]")
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     SimpleJekyllSearch({
       searchInput: document.getElementById('search-input'),
@@ -45,38 +50,40 @@
           }
         }
 
-        // NEW: Extract matched snippet and highlight the text
         if (prop === 'content') {
-          const searchTerm = document.getElementById('search-input').value.trim();
+          const rawSearchTerm = document.getElementById('search-input').value.trim();
           
-          if (searchTerm && value) {
-            // Create a case-insensitive regex for the search term
-            const regex = new RegExp(searchTerm, 'gi');
+          if (rawSearchTerm && value) {
+            const safeSearchTerm = escapeRegExp(rawSearchTerm);
+            
+            // IMPROVEMENT 2: Split terms by space to highlight multiple words
+            const terms = safeSearchTerm.split(/\s+/).join('|');
+            const regex = new RegExp(`(${terms})`, 'gi');
             const match = regex.exec(value);
             
             if (match) {
-              const padding = 60; // Number of characters to show before and after the match
-              const start = Math.max(0, match.index - padding);
-              const end = Math.min(value.length, match.index + searchTerm.length + padding);
+              const padding = 60;
+              let start = Math.max(0, match.index - padding);
+              let end = Math.min(value.length, match.index + match[0].length + padding);
+              
+              // IMPROVEMENT 3: Snap to nearest space to avoid cutting words in half
+              if (start > 0) start = value.indexOf(' ', start) + 1 || start;
+              if (end < value.length) end = value.lastIndexOf(' ', end) || end;
               
               let snippet = value.substring(start, end);
               
-              // Add ellipses if the text was cut off
               if (start > 0) snippet = '...' + snippet;
               if (end < value.length) snippet = snippet + '...';
               
-              // Highlight the matched word using HTML <mark> tag
-              // $& inserts the matched substring, preserving its original capitalization
-              return snippet.replace(regex, '<mark class="bg-warning text-dark">$&</mark>');
+              // $1 refers to the matched group in our regex
+              return snippet.replace(regex, '<mark class="bg-warning text-dark">$1</mark>');
             }
           }
           
-          // Fallback: If the search term matched the title/tags but isn't in the content, 
-          // just show the first 120 characters of the post.
+          // Fallback
           return value.length > 120 ? value.substring(0, 120) + '...' : value;
         }
 
-        // Append the search text fragment to the URL
         if (prop === 'url') {
           const searchTerm = document.getElementById('search-input').value.trim();
           if (searchTerm) {
