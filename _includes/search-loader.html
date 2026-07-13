@@ -28,6 +28,7 @@
       searchResultTemplate: '{{ result_elem | strip_newlines }}',
       noResultsText: '{{ not_found }}',
       templateMiddleware: function(prop, value, template) {
+        
         if (prop === 'categories') {
           if (value === '') {
             return `${value}`;
@@ -44,7 +45,38 @@
           }
         }
 
-        // New condition to append the search text fragment to the URL
+        // NEW: Extract matched snippet and highlight the text
+        if (prop === 'content') {
+          const searchTerm = document.getElementById('search-input').value.trim();
+          
+          if (searchTerm && value) {
+            // Create a case-insensitive regex for the search term
+            const regex = new RegExp(searchTerm, 'gi');
+            const match = regex.exec(value);
+            
+            if (match) {
+              const padding = 60; // Number of characters to show before and after the match
+              const start = Math.max(0, match.index - padding);
+              const end = Math.min(value.length, match.index + searchTerm.length + padding);
+              
+              let snippet = value.substring(start, end);
+              
+              // Add ellipses if the text was cut off
+              if (start > 0) snippet = '...' + snippet;
+              if (end < value.length) snippet = snippet + '...';
+              
+              // Highlight the matched word using HTML <mark> tag
+              // $& inserts the matched substring, preserving its original capitalization
+              return snippet.replace(regex, '<mark class="bg-warning text-dark">$&</mark>');
+            }
+          }
+          
+          // Fallback: If the search term matched the title/tags but isn't in the content, 
+          // just show the first 120 characters of the post.
+          return value.length > 120 ? value.substring(0, 120) + '...' : value;
+        }
+
+        // Append the search text fragment to the URL
         if (prop === 'url') {
           const searchTerm = document.getElementById('search-input').value.trim();
           if (searchTerm) {
@@ -52,6 +84,7 @@
           }
           return value;
         }
+        
       }
     });
   });
