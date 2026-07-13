@@ -19,8 +19,6 @@
 {% capture not_found %}<p class="mt-5">{{ site.data.locales[include.lang].search.no_results }}</p>{% endcapture %}
 
 <script>
-  // IMPROVEMENT 1: Helper function to safely escape regex characters 
-  // (Prevents site breaking if someone searches for "C++" or "array[0]")
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
@@ -56,17 +54,17 @@
           if (rawSearchTerm && value) {
             const safeSearchTerm = escapeRegExp(rawSearchTerm);
             
-            // IMPROVEMENT 2: Split terms by space to highlight multiple words
-            const terms = safeSearchTerm.split(/\s+/).join('|');
-            const regex = new RegExp(`(${terms})`, 'gi');
+            // Match the EXACT phrase typed so far globally
+            const regex = new RegExp(`(${safeSearchTerm})`, 'gi');
+            
+            // Find the first occurrence to center our snippet
             const match = regex.exec(value);
             
             if (match) {
-              const padding = 60;
+              const padding = 100; // Increased padding to show more surrounding words
               let start = Math.max(0, match.index - padding);
               let end = Math.min(value.length, match.index + match[0].length + padding);
               
-              // IMPROVEMENT 3: Snap to nearest space to avoid cutting words in half
               if (start > 0) start = value.indexOf(' ', start) + 1 || start;
               if (end < value.length) end = value.lastIndexOf(' ', end) || end;
               
@@ -75,13 +73,13 @@
               if (start > 0) snippet = '...' + snippet;
               if (end < value.length) snippet = snippet + '...';
               
-              // $1 refers to the matched group in our regex
+              // Highlight ALL instances of the phrase inside this new snippet
               return snippet.replace(regex, '<mark class="bg-warning text-dark">$1</mark>');
             }
           }
           
-          // Fallback
-          return value.length > 120 ? value.substring(0, 120) + '...' : value;
+          // Fallback context size increased to 150 characters
+          return value.length > 150 ? value.substring(0, 150) + '...' : value;
         }
 
         if (prop === 'url') {
