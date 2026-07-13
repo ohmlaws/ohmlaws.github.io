@@ -120,3 +120,8 @@
 .card-body time {
     display: none !important;
 }
+
+/* No margin-left after time and before categories */
+#post-list .card .card-body .post-meta i:not(:first-child) {
+    margin-left: 0 !important;
+}
